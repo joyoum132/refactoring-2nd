@@ -72,15 +72,26 @@ public class StudyDashboard {
             writer.print(header(totalNumberOfEvents, participants.size()));
 
             participants.forEach(p -> {
-                long count = p.homework().values().stream()
-                        .filter(v -> v == true)
-                        .count();
-                double rate = count * 100 / totalNumberOfEvents;
-
-                String markdownForHomework = String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), rate);
+                //fixme rate 계산을 위한 함수를 추출하고, 해당 함수 결과를 임시변수로 사용하는 대신 getMarkdownForParticipant 함수 내에서 직접 호출 (매개변수 3개에서 2개로 줄임)
+//                double rate = getRate(p, totalNumberOfEvents);
+//                String markdownForHomework = getMarkdownForParticipant(p, totalNumberOfEvents, rate);
+                
+                String markdownForHomework = getMarkdownForParticipant(p, totalNumberOfEvents);
                 writer.print(markdownForHomework);
             });
         }
+    }
+
+    private static double getRate(Participant p, int totalNumberOfEvents) {
+        long count = p.homework().values().stream()
+                .filter(v -> v == true)
+                .count();
+        double rate = count * 100 / totalNumberOfEvents;
+        return rate;
+    }
+
+    private String getMarkdownForParticipant(Participant p, int totalNumberOfEvents) {
+        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(p, totalNumberOfEvents));
     }
 
     /**
