@@ -15,6 +15,7 @@ public class StudyDashboard {
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
         GHIssue issue = repository.getIssue(eventId);
 
+        // 변수는 사용 직전에 호출하는 것이 좋다
         // Get participants
         Set<String> participants = new HashSet<>();
         issue.getComments().forEach(c -> participants.add(c.getUserName()));
@@ -25,7 +26,8 @@ public class StudyDashboard {
 
     private void printReviewers() throws IOException {
         // Get github issue to check homework
-        Set<String> reviewers = new HashSet<>();
+        //미리 다 선언되면 맥락 파악이 어려워질 수 있음
+        Set<String> reviewers = new HashSet<>(); // 36라인 위로 옮기자!
         GitHub gitHub = GitHub.connect();
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
         GHIssue issue = repository.getIssue(30);
