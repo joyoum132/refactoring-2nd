@@ -1,4 +1,4 @@
-package com.example.practice.ch1._01_smell_mysterious_name._01_change_method_declaration;
+package com.example.practice._01_smell_mysterious_name._01_before;
 
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueComment;
@@ -11,21 +11,13 @@ import java.util.List;
 import java.util.Set;
 
 //작성자의 닉네임 + 리뷰 본문을 불러오는 코드
-//Q1. 매개변수가 적절한가? refactoring > change signature
-//Q2. 이름이 적절한가? refactoring > rename
 public class StudyDashboard {
 
     private Set<String> usernames = new HashSet<>();
 
     private Set<String> reviews = new HashSet<>();
 
-    //스터디 리뷰에 작성되어 있는 리뷰어 목록과 리뷰를 읽어옵니다.
-    private void loadReviews() throws IOException {
-        //fixme 리뷰를 불러 올 이슈는 하나이기 때문에 매개변수에서 제거하고 함수 본문에 추가
-        GitHub gitHub = GitHub.connect();
-        GHRepository repository = gitHub.getRepository("whiteship/live-study");
-        GHIssue issue = repository.getIssue(30);
-
+    private void studyReviews(GHIssue issue) throws IOException {
         List<GHIssueComment> comments = issue.getComments();
         for (GHIssueComment comment : comments) {
             usernames.add(comment.getUserName());
@@ -42,8 +34,12 @@ public class StudyDashboard {
     }
 
     public static void main(String[] args) throws IOException {
+        GitHub gitHub = GitHub.connect();
+        GHRepository repository = gitHub.getRepository("whiteship/live-study");
+        GHIssue issue = repository.getIssue(30);
+
         StudyDashboard studyDashboard = new StudyDashboard();
-        studyDashboard.loadReviews();
+        studyDashboard.studyReviews(issue);
         studyDashboard.getUsernames().forEach(System.out::println);
         studyDashboard.getReviews().forEach(System.out::println);
     }
