@@ -13,7 +13,7 @@ public class Order {
 
     public double finalPrice() {
         double basePrice = this.quantity * this.itemPrice;
-        int discountLevel = this.quantity > 100 ? 2 : 1;
+        int discountLevel = this.quantity > 100 ? 2 : 1; //할인률은 수량에 따라 다르다
         return this.discountedPrice(basePrice, discountLevel);
     }
 
