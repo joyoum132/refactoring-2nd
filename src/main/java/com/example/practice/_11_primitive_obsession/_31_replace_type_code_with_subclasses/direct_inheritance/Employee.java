@@ -11,9 +11,9 @@ public abstract class Employee {
 
     public static Employee createEmployee(String name, String type) {
         return switch (type) {
-            case "engineer" -> new Engineer(name, type);
-            case "manager" -> new Manager(name, type);
-            case "salesman" -> new Salesman(name, type);
+            case "engineer" -> new Engineer(name);
+            case "manager" -> new Manager(name);
+            case "salesman" -> new Salesman(name);
             default -> throw new IllegalStateException("Unexpected value: " + type);
         };
     }
