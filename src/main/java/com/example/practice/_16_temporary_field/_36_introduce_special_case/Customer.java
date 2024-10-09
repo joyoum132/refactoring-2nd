@@ -14,6 +14,10 @@ public class Customer {
         this.paymentHistory = paymentHistory;
     }
 
+    boolean isUnknown() {
+        return false;
+    }
+
     public String getName() {
         return name;
     }
