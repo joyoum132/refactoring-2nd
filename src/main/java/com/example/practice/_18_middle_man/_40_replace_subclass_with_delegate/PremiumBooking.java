@@ -2,6 +2,7 @@ package com.example.practice._18_middle_man._40_replace_subclass_with_delegate;
 
 import java.time.LocalDateTime;
 
+//회색 > 미사용
 public class PremiumBooking extends Booking {
 
     private PremiumExtra extra;
@@ -11,17 +12,19 @@ public class PremiumBooking extends Booking {
         this.extra = extra;
     }
 
-    @Override
-    public boolean hasTalkback() {
-        return this.show.hasOwnProperty("talkback");
-    }
+//    //중개자 역할
+//    @Override
+//    public boolean hasTalkback() {
+//        System.out.println("premium");
+//        return this.premiumDelegate.hasTalkback();
+//    }
 
-    @Override
-    public double basePrice() {
-        return Math.round(super.basePrice() + this.extra.getPremiumFee());
-    }
+//    @Override
+//    public double basePrice() {
+//        return Math.round(super.basePrice() + this.extra.getPremiumFee());
+//    }
 
-    public boolean hasDinner() {
-        return this.extra.hasOwnProperty("dinner") && !this.isPeakDay();
-    }
+//    public boolean hasDinner() {
+//        return this.extra.hasOwnProperty("dinner") && !this.isPeakDay();
+//    }
 }
