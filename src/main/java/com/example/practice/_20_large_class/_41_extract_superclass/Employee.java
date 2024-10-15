@@ -1,10 +1,8 @@
 package com.example.practice._20_large_class._41_extract_superclass;
 
-public class Employee {
+public class Employee extends Party {
 
     private Integer id;
-
-    private String name;
 
     private double monthlyCost;
 
@@ -16,11 +14,8 @@ public class Employee {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getMonthlyCost() {
-        return monthlyCost;
+    @Override
+    double monthlyCost() {
+        return this.monthlyCost;
     }
 }
