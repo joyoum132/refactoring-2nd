@@ -12,8 +12,12 @@ public class Customer {
         return discountRate;
     }
 
-    public void setDiscountRate(Double discountRate) {
-        assert discountRate != null;
+    public void setDiscountRate(Double discountRate) throws IllegalAccessException {
+        /*NOTE assert 로 discountRate 은 NotNull 임을 표현*/
+        if(discountRate != null && discountRate > 0){
+            throw new IllegalAccessException("할인률은 양수");
+        }
+        assert discountRate != null && discountRate > 0;
         this.discountRate = discountRate;
     }
 }
